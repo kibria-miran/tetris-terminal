@@ -1,16 +1,39 @@
-# tetris-terminal
+# Terminal Dungeon Crawler
 
-A classic Tetris clone that runs entirely in your terminal. Written in Python
-using only the standard library (`curses`) — no dependencies to install.
+A complete roguelike-style terminal game in Python. Requires only the standard
+library (uses `termios` on Unix, `msvcrt` on Windows).
 
-## Features
+## How to Play
 
-- All 7 tetrominoes (I, O, T, S, Z, J, L) with wall-kick rotation
-- Ghost piece showing where the current piece will land
-- Line clears with classic scoring (100/300/500/800 × level)
-- Levels that speed the game up every 10 lines
-- Next-piece preview and hold slot
-- Pause, game over, and instant restart
+**Controls:**
+- `WASD` or **arrow keys** — move
+- `q` — quit
+- `r` — restart (after death)
+
+**Goal:** Descend as many dungeon levels as possible. Step on `>` (stairs) to
+go deeper. Enemies get tougher the deeper you go.
+
+**Symbols:**
+
+| Symbol | Meaning |
+|--------|---------|
+| `@` | You |
+| `#` | Wall |
+| `.` | Floor |
+| `>` | Stairs (next level) |
+| `r` | Rat (weak) |
+| `g` | Goblin (medium) |
+| `o` | Orc (strong) |
+| `!` | Health Potion (+10 HP) |
+| `/` | Sword (+2 damage) |
+| `[` | Shield (+2 armor) |
+
+**Mechanics:**
+- **Combat:** Walk into a monster to attack; monsters also attack back.
+- **XP / Leveling:** Kill monsters to earn XP. Level up = more HP, damage, and full heal.
+- **Chasing:** Monsters within 6 tiles will pursue you.
+- **Items:** Picked up automatically when you step on them.
+- **Random dungeons:** Every level is procedurally generated with rooms and corridors.
 
 ## Install (Arch Linux)
 
@@ -23,33 +46,18 @@ sudo pacman -S --needed python
 Clone and play:
 
 ```bash
-git clone https://github.com/<you>/tetris-terminal.git
+git clone https://github.com/kibria-miran/tetris-terminal.git
 cd tetris-terminal
-python3 tetris.py
+python game.py
 ```
 
-## Controls
+## Notes
 
-| Key            | Action                |
-| -------------- | --------------------- |
-| ← / →          | Move left / right     |
-| ↑ / ↓          | Rotate / soft drop    |
-| Space          | Hard drop             |
-| c              | Hold piece            |
-| p              | Pause                 |
-| r              | Restart (after loss)  |
-| q              | Quit                  |
-
-## Scoring
-
-| Lines cleared | Points (× level) |
-| ------------- | ---------------- |
-| 1             | 100              |
-| 2             | 300              |
-| 3             | 500              |
-| 4 (Tetris)    | 800              |
-
-Soft drop +1 per row, hard drop +2 per row.
+- **Works on Linux/macOS/Windows** — uses `termios` on Unix and `msvcrt` on Windows.
+- Only **standard library** — no pip installs needed.
+- The game uses `clear_screen` between frames, so it plays in any terminal.
+- For best experience on Unix, run in a standard terminal (not an IDE console).
+  On Windows, run in `cmd` or `PowerShell`.
 
 ## License
 
